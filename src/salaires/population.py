@@ -17,6 +17,22 @@ import pandas as pd
 
 DESCRIPTION = "Développeurs professionnels salariés à temps plein en France"
 
+# Niveaux d'expérience, à partir de WorkExp (années d'expérience professionnelle).
+# Junior : 0 à 4 ans, Confirmé : 5 à 9 ans, Senior : 10 ans et plus.
+# Chaque niveau garde au moins SEUIL_N répondants : voir DECISIONS.md.
+NIVEAUX = ["Junior", "Confirmé", "Senior"]
+BORNES_NIVEAU = [-1, 4, 9, float("inf")]
+
 
 def definir_population(df: pd.DataFrame) -> pd.DataFrame:
     raise NotImplementedError("Socle commun : population à écrire")
+
+
+def ajouter_niveau(df: pd.DataFrame) -> pd.DataFrame:
+    """Ajoute la colonne Niveau (Junior, Confirmé, Senior) à partir de WorkExp.
+
+    Les répondants sans WorkExp restent dans le tableau, avec un Niveau vide.
+    """
+    resultat = df.copy()
+    resultat["Niveau"] = pd.cut(resultat["WorkExp"], bins=BORNES_NIVEAU, labels=NIVEAUX)
+    return resultat
