@@ -18,6 +18,12 @@ CODE_PRINCIPAL = "I create code as a primary part of my job"
 SALARIE = "Employed"
 DEVISE = "EUR"
 
+# Niveaux d'expérience, à partir de WorkExp (années d'expérience professionnelle).
+# Junior : 0 à 4 ans, Confirmé : 5 à 9 ans, Senior : 10 ans et plus.
+# Chaque niveau garde au moins SEUIL_N répondants : voir DECISIONS.md.
+NIVEAUX = ["Junior", "Confirmé", "Senior"]
+BORNES_NIVEAU = [-1, 4, 9, float("inf")]
+
 # Bornes contre les valeurs aberrantes, incluses.
 # Sur les 382 répondants avant bornes : 2e centile ≈ 15 000 €, 99e centile ≈ 192 000 €.
 SALAIRE_MIN = 15_000
@@ -33,3 +39,13 @@ def definir_population(df: pd.DataFrame) -> pd.DataFrame:
     d = d[d["Compensation"].notna()].copy()
     d["SalaireEUR"] = d["Compensation"]
     return d[d["SalaireEUR"].between(SALAIRE_MIN, SALAIRE_MAX)]
+
+
+def ajouter_niveau(df: pd.DataFrame) -> pd.DataFrame:
+    """Ajoute la colonne Niveau (Junior, Confirmé, Senior) à partir de WorkExp.
+
+    Les répondants sans WorkExp restent dans le tableau, avec un Niveau vide.
+    """
+    resultat = df.copy()
+    resultat["Niveau"] = pd.cut(resultat["WorkExp"], bins=BORNES_NIVEAU, labels=NIVEAUX)
+    return resultat
