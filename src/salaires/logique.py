@@ -1,30 +1,35 @@
-"""Logique partagée par tous les axes. Aucun import Streamlit ici.
-
-Responsable : à attribuer (socle commun).
-
-À implémenter :
-- SEUIL_N : en dessous, une médiane n'est pas affichée.
-- mediane_par_groupe(df, colonne) -> DataFrame [colonne, mediane, n]
-  avec les groupes sous SEUIL_N marqués ou retirés.
-- legende_population(n, annee) -> str, par exemple :
-  "Développeurs professionnels salariés à temps plein en France,
-   enquête Stack Overflow 2026, n = 412 répondants"
-- eclater_choix_multiples(df, colonne) : pour les colonnes séparées par ";"
-  (LanguagesHaveWorkedWith...), une ligne par choix.
-"""
+"""Logique partagée par tous les axes. Aucun import Streamlit ici."""
 
 import pandas as pd
+
+from salaires.population import DESCRIPTION
 
 SEUIL_N = 30
 
 
-def mediane_par_groupe(df: pd.DataFrame, colonne: str) -> pd.DataFrame:
-    raise NotImplementedError
+def mediane_par_groupe(
+    df: pd.DataFrame, colonne: str, valeur: str = "SalaireEUR"
+) -> pd.DataFrame:
+    """Médiane et effectif par groupe, sans les groupes sous SEUIL_N."""
+    stats = (
+        df.groupby(colonne, observed=True)[valeur]
+        .agg(mediane="median", n="count")
+        .reset_index()
+    )
+    return stats[stats["n"] >= SEUIL_N].reset_index(drop=True)
 
 
-def legende_population(n: int, annee: int = 2026) -> str:
-    raise NotImplementedError
+def legende_population(
+    n: int, annee: int = 2026, description: str = DESCRIPTION
+) -> str:
+    """Légende affichée sous chaque figure : qui, quelle enquête, combien."""
+    return f"{description}, enquête Stack Overflow {annee}, n = {n} répondants"
 
 
 def eclater_choix_multiples(df: pd.DataFrame, colonne: str) -> pd.DataFrame:
-    raise NotImplementedError
+    """Une ligne par choix pour une colonne dont les valeurs sont séparées par ';'."""
+    eclate = df.dropna(subset=[colonne]).copy()
+    eclate[colonne] = eclate[colonne].str.split(";")
+    eclate = eclate.explode(colonne)
+    eclate[colonne] = eclate[colonne].str.strip()
+    return eclate.reset_index(drop=True)
