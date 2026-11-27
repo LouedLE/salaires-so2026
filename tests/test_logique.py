@@ -1,0 +1,17 @@
+import pandas as pd
+
+from salaires import logique
+
+
+def test_mediane_par_groupe_exclut_les_groupes_sous_le_seuil():
+    seuil = logique.SEUIL_N
+    df = pd.DataFrame(
+        {
+            "Groupe": ["A"] * seuil + ["B"] * (seuil - 1),
+            "SalaireEUR": list(range(1, seuil + 1)) + [100] * (seuil - 1),
+        }
+    )
+    res = logique.mediane_par_groupe(df, "Groupe")
+    assert list(res["Groupe"]) == ["A"]
+    assert res.loc[0, "n"] == seuil
+    assert res.loc[0, "mediane"] == 15.5
