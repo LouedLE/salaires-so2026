@@ -23,6 +23,23 @@ Chaque choix est daté et justifié. Les chiffres viennent du fichier, pas de la
 - Comparaison européenne (salaire renseigné) : Allemagne 1 343, Royaume-Uni 918,
   Pays-Bas 377, Espagne 357.
 
+## Axe 5 : France face à l'Europe (27/11/2026)
+
+- Population propre à l'axe, définie dans `src/salaires/axes/axe5_france_europe.py` (pas dans `population.py`) :
+  `Country` parmi France, Allemagne, Pays-Bas, Espagne et Royaume-Uni, code comme activité principale (`CodeMain`),
+  salarié (`Employment = Employed`), `ConvertedCompYearly` renseigné. 2 516 répondants :
+  Allemagne 951, Royaume-Uni 657, France 386, Pays-Bas 287, Espagne 235.
+- Unité : les salaires sont comparés en `ConvertedCompYearly` (dollars US), seule unité commune entre pays.
+  Les montants dépendent donc du taux de change et ne se comparent pas aux euros des autres axes
+  (France : 60 276 $ ici, 53 000 € dans la population principale).
+- Pas de bornes contre les valeurs aberrantes dans cet axe : on ne compare que des médianes, peu sensibles
+  aux quelques salaires extrêmes déclarés (jusqu'à 10,6 millions de dollars au Royaume-Uni).
+- Salaires médians : France 60 276 $, Espagne 62 550 $, Pays-Bas 77 335 $, Allemagne 81 884 $, Royaume-Uni 93 098 $.
+- Limite affichée sur la page : salaire brut, sans prise en compte du coût de la vie ni des cotisations sociales,
+  très différentes entre ces pays.
+- Écart par niveau d'expérience : mêmes niveaux que `ajouter_niveau` (Junior, Confirmé, Senior).
+  Les juniors espagnols (n = 28) sont sous le seuil de 30 : médiane et écart masqués.
+
 ## Population
 
 - À compléter : chaque filtre avec le nombre de lignes avant et après.
