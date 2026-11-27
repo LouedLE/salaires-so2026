@@ -1,6 +1,6 @@
 # Architecture technique
 
-Document à compléter au fil du socle commun.
+Fonctionnalités, fichiers et fonctions de l'application, circulation des données du fichier brut jusqu'aux vues, cache et données de session.
 
 ## Flux des données
 
@@ -27,10 +27,12 @@ app/pages/N_*.py                une page par axe, filtres et vues
 |----------------|----------|-----------|
 | Téléchargement des données | scripts/telecharger_donnees.py | telecharger |
 | Chargement | src/salaires/chargement.py | charger_brut |
-| Population | src/salaires/population.py | definir_population |
-| Logique partagée | src/salaires/logique.py | mediane_par_groupe, legende_population |
+| Population | src/salaires/population.py | definir_population, ajouter_niveau |
+| Population mise en cache | app/donnees.py | charger_population |
+| Logique partagée | src/salaires/logique.py | mediane_par_groupe, legende_population, eclater_choix_multiples |
+| Figure et légende de population | app/composants.py | afficher_figure |
 | Tableau de bord | app/Accueil.py, app/filtres.py | filtre_niveau |
-| Axes 1 à 5 | src/salaires/axes/, app/pages/ | à compléter |
+| Axe 1 : Expérience | src/salaires/axes/axe1_experience.py, app/pages/1_experience.py | ajouter_tranche, courbe_salaire, gain_par_annee |
 | Axe 2 : Métier et entreprise | src/salaires/axes/axe2_metier_entreprise.py, app/pages/2_metier_entreprise.py | ajouter_groupes, groupes_sous_seuil |
 | Axe 5 : France face à l'Europe | src/salaires/axes/axe5_france_europe.py, app/pages/5_france_europe.py | definir_population_europe, mediane_par_pays, mediane_par_niveau, ecart_avec_france |
 
