@@ -3,6 +3,7 @@ import streamlit as st
 
 from composants import afficher_figure
 from donnees import charger_population
+from filtres import filtre_niveau
 from salaires.axes.axe2_metier_entreprise import (
     AUTRES_PROFILS,
     ORDRE_RESPONSABILITES,
@@ -54,12 +55,9 @@ def afficher_vue(table, x, couleurs, ordre, description, titre_x=""):
 
 st.title("Axe 2 : Métier et entreprise")
 
-pop = ajouter_groupes(charger_population())
-
-# Filtre partagé entre les pages : niveau d'expérience.
-niveau = st.session_state.get("niveau", "Tous")
-if niveau != "Tous":
-    pop = pop[pop["Niveau"] == niveau]
+# Filtre partagé entre les pages : sélecteur de niveau d'expérience dans la sidebar.
+pop = filtre_niveau(ajouter_groupes(charger_population()))
+niveau = st.session_state["niveau"]
 
 # Filtre de l'axe : taille d'entreprise, appliqué aux vues métier et responsabilité.
 taille = st.sidebar.selectbox("Taille d'entreprise", ["Toutes"] + ORDRE_TAILLES)
