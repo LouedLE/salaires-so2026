@@ -3,24 +3,39 @@ import streamlit as st
 
 from composants import afficher_figure
 from donnees import charger_population
-from salaires.axes.axe4_conditions_travail import comparer_esn_editeurs, medianes_par_travail
+from salaires.axes.axe4_conditions_travail import (
+    EDITEURS,
+    ESN,
+    comparer_esn_editeurs,
+    medianes_par_travail,
+)
+
+
+def euros(montant):
+    return f"{montant:,.0f} €".replace(",", " ")
+
 
 st.title("Axe 4 : Conditions de travail et secteur")
-st.info(
-    "Le commanditaire est une ESN : la figure centrale compare les salaires médians "
-    "des ESN et des éditeurs de logiciels."
-)
 
 niveau = st.session_state.get("niveau", "Tous")
 pop = charger_population()
 if niveau != "Tous":
     pop = pop[pop["Niveau"] == niveau]
 
-st.subheader("ESN contre éditeurs de logiciels")
 esn_editeurs = comparer_esn_editeurs(pop)
+travail = medianes_par_travail(pop)
+
 if esn_editeurs.empty:
     st.warning("Effectif insuffisant pour ce niveau.")
 else:
+    medianes = esn_editeurs.set_index("SecteurGroupe")["mediane"]
+    ecart = (1 - medianes[ESN] / medianes[EDITEURS]) * 100
+    st.subheader(
+        f"Les ESN versent un salaire médian de {euros(medianes[ESN])}, "
+        f"{ecart:.0f} % de moins que les éditeurs de logiciels ({euros(medianes[EDITEURS])})."
+    )
+
+    st.markdown("### ESN contre éditeurs de logiciels")
     fig = px.bar(
         esn_editeurs,
         x="SecteurGroupe",
@@ -28,10 +43,9 @@ else:
         text="mediane",
         labels={"SecteurGroupe": "Secteur", "mediane": "Salaire médian (€)"},
     )
-    afficher_figure(fig, n=len(pop))
+    afficher_figure(fig, n=int(esn_editeurs["n"].sum()))
 
-st.subheader("Salaire médian selon le mode de travail")
-travail = medianes_par_travail(pop)
+st.markdown("### Salaire médian selon le mode de travail")
 fig2 = px.bar(
     travail,
     x="Travail",
@@ -39,4 +53,4 @@ fig2 = px.bar(
     text="mediane",
     labels={"Travail": "Mode de travail", "mediane": "Salaire médian (€)"},
 )
-afficher_figure(fig2, n=len(pop))
+afficher_figure(fig2, n=int(travail["n"].sum()))
