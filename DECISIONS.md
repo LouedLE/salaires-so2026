@@ -39,7 +39,26 @@ entre 15 000 et 200 000 €, soit 371 répondants. Salaire médian 53 000 €,
 
 ## Population
 
-- À compléter : chaque filtre avec le nombre de lignes avant et après.
+Code : `definir_population` dans `src/salaires/population.py`. Filtres appliqués dans cet ordre,
+comptés sur `survey_results_public.csv` 2026.
+
+| # | Filtre | Avant | Après | Justification |
+|---|--------|------:|------:|---------------|
+| 1 | `Country == "France"` | 30 903 | 794 | Grille salariale d'une ESN française. |
+| 2 | `CodeMain == "I create code as a primary part of my job"` | 794 | 628 | Garder les développeurs, pas les managers ni ceux qui codent occasionnellement. |
+| 3 | `Employment == "Employed"` | 628 | 463 | Salariés seulement : les freelances (96 en France) facturent un chiffre d'affaires, pas un salaire. |
+| 4 | `Currency` commence par `"EUR"` | 463 | 454 | Comparer des montants dans la même monnaie, sans taux de change. |
+| 5 | `Compensation` renseigné | 454 | 382 | Pas de salaire, pas de médiane possible. |
+| 6 | `SalaireEUR` entre 15 000 et 200 000 € inclus | 382 | 371 | Valeurs aberrantes (voir ci-dessous). |
+
+- `SalaireEUR = Compensation` : montant annuel déclaré en euros, plutôt que `ConvertedCompYearly`
+  (converti en dollars, dépend du taux de change).
+- Bornes : sur les 382 lignes avant bornes, le 2e centile vaut 15 050 € et le 99e 191 900 €.
+  15 000 € est sous le SMIC annuel brut à temps plein : en dessous, il s'agit d'un salaire mensuel
+  ou d'une saisie erronée (minimum observé 54 €). 200 000 € écarte les quelques montants
+  très au-dessus du marché (maximum 320 000 €). 8 lignes retirées en bas, 3 en haut.
+- Salaire médian de la population finale : 53 000 € (n = 371), identique à celui avant bornes.
+- Limite : `Employment = "Employed"` ne distingue pas temps plein et temps partiel en 2026.
 
 ## Niveaux d'expérience (27/11/2026)
 
