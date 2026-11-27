@@ -35,7 +35,7 @@ app/pages/N_*.py                une page par axe, filtres et vues
 
 ## Cache
 
-- `@st.cache_data` sur le chargement et la population : à compléter.
+- `charger_population()` (app/donnees.py) est décorée par `@st.cache_data` : elle enchaîne `charger_brut`, `definir_population` puis `ajouter_niveau`. Le résultat est calculé une fois puis réutilisé par toutes les pages.
 - Axe 5 : `charger_population_europe` (page 5) met en cache la population des cinq pays.
 
 ## Données de session (`st.session_state`)
