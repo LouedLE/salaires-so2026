@@ -34,6 +34,7 @@ app/pages/N_*.py                une page par axe, filtres et vues
 | Tableau de bord | app/Accueil.py, app/filtres.py | filtre_niveau |
 | Axe 1 : Expérience | src/salaires/axes/axe1_experience.py, app/pages/1_experience.py | ajouter_tranche, courbe_salaire, gain_par_annee |
 | Axe 2 : Métier et entreprise | src/salaires/axes/axe2_metier_entreprise.py, app/pages/2_metier_entreprise.py | ajouter_groupes, groupes_sous_seuil |
+| Axe 3 : Technologies | src/salaires/axes/axe3_technologies.py, app/pages/3_technologies.py | population_langages, mediane_par_langage |
 | Axe 5 : France face à l'Europe | src/salaires/axes/axe5_france_europe.py, app/pages/5_france_europe.py | definir_population_europe, mediane_par_pays, mediane_par_niveau, ecart_avec_france |
 
 ## Cache
@@ -49,3 +50,4 @@ app/pages/N_*.py                une page par axe, filtres et vues
 - Toutes les pages d'axe lisent `st.session_state.get("niveau", "Tous")`, sauf l'axe 1 (l'expérience y est la variable étudiée).
 - Axe 2 : appelle `filtre_niveau` (app/filtres.py), qui affiche le sélecteur de niveau et filtre la population.
   Le filtre propre à l'axe (taille d'entreprise) reste dans `st.sidebar`, hors session.
+- Axe 3 : appelle `filtre_niveau` (app/filtres.py), qui affiche le sélecteur de niveau dans la sidebar et lit la même clé `niveau`.
