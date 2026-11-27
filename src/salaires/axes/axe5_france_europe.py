@@ -52,3 +52,27 @@ def mediane_par_pays(pop: pd.DataFrame) -> pd.DataFrame:
     )
     tableau["fiable"] = tableau["n"] >= SEUIL_N
     return tableau
+
+
+def mediane_par_niveau(pop: pd.DataFrame, pays: str) -> pd.DataFrame:
+    """Salaire médian et effectif par niveau d'expérience, pour la France et le pays choisi."""
+    deux_pays = pop[pop["Pays"].isin(["France", pays])]
+    tableau = (
+        deux_pays.groupby(["Niveau", "Pays"], observed=False)["ConvertedCompYearly"]
+        .agg(mediane="median", n="count")
+        .reset_index()
+    )
+    tableau["fiable"] = tableau["n"] >= SEUIL_N
+    return tableau
+
+
+def ecart_avec_france(par_niveau: pd.DataFrame, pays: str) -> pd.DataFrame:
+    """Écart en % entre le salaire médian du pays et celui de la France, pour chaque niveau.
+
+    L'écart reste vide si l'une des deux médianes repose sur moins de SEUIL_N répondants.
+    """
+    fiables = par_niveau[par_niveau["fiable"]]
+    medianes = fiables.pivot(index="Niveau", columns="Pays", values="mediane")
+    medianes = medianes.reindex(index=NIVEAUX, columns=["France", pays])
+    medianes["ecart_pct"] = (medianes[pays] / medianes["France"] - 1) * 100
+    return medianes.rename_axis(columns=None).reset_index()
