@@ -26,3 +26,13 @@ Chaque choix est daté et justifié. Les chiffres viennent du fichier, pas de la
 ## Population
 
 - À compléter : chaque filtre avec le nombre de lignes avant et après.
+
+## Niveaux d'expérience (27/11/2026)
+
+- Colonne `Niveau`, calculée par `ajouter_niveau` (`src/salaires/population.py`) à partir de `WorkExp`
+  (années d'expérience professionnelle) : Junior de 0 à 4 ans, Confirmé de 5 à 9 ans, Senior 10 ans et plus.
+- Premier découpage écarté : « moins de 3 ans » ne donnait que 22 juniors, sous le seuil de 30.
+- Effectifs sur la population (France, code comme activité principale, salarié, salaire en euros
+  entre 15 000 et 200 000 €, 371 répondants) : 56 juniors, 107 confirmés, 207 seniors.
+- Le répondant sans `WorkExp` reste dans la population avec un `Niveau` vide :
+  il compte dans « Tous » mais dans aucun niveau.
