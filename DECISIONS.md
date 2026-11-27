@@ -138,5 +138,8 @@ Seuls trois métiers dépassent 30 répondants. Les autres sont réunis pour ne 
   « groupe hétérogène (desktop, DevOps, embarqué, IA, recherche...), médiane non interprétable comme un métier ».
   Il n'est jamais cité dans le message. Le retirer ferait disparaître 134 répondants sur 371 sans le dire.
 - Le message de la page porte sur la responsabilité : 48 000 € pour un contributeur, 64 000 € pour un contributeur senior.
+- À expérience égale, l'écart se réduit sans disparaître : chez les seniors (10 ans et plus), 67 750 € pour un
+  contributeur senior (n = 86) contre 58 000 € pour un contributeur (n = 81), soit 9 750 € au lieu de 16 000 €.
+  Une partie de l'écart global vient donc de l'expérience.
 - La figure sur la taille d'entreprise est gardée et présentée comme un constat : la taille de l'entreprise
   ne change presque pas le salaire (52 000 à 55 000 €). Un résultat nul reste une information utile pour l'ESN.

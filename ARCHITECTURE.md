@@ -45,5 +45,5 @@ app/pages/N_*.py                une page par axe, filtres et vues
   Le widget utilise la clé `_choix_niveau`, recopiée dans `niveau` à chaque changement :
   Streamlit efface les clés de widget au changement de page, pas les autres.
 - Toutes les pages d'axe lisent `st.session_state.get("niveau", "Tous")`, sauf l'axe 1 (l'expérience y est la variable étudiée).
-- Axe 2 : lit `st.session_state.get("niveau", "Tous")` et filtre sur la colonne `Niveau` si la valeur
-  n'est pas « Tous ». Le filtre propre à l'axe (taille d'entreprise) reste dans `st.sidebar`, hors session.
+- Axe 2 : appelle `filtre_niveau` (app/filtres.py), qui affiche le sélecteur de niveau et filtre la population.
+  Le filtre propre à l'axe (taille d'entreprise) reste dans `st.sidebar`, hors session.
