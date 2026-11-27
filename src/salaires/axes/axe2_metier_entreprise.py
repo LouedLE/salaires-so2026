@@ -10,6 +10,8 @@ Regroupements (tables de correspondance dans DECISIONS.md) :
 
 import pandas as pd
 
+from salaires.logique import SEUIL_N
+
 AUTRES_PROFILS = "Autres profils de développement"
 
 FAMILLES = {
@@ -24,6 +26,7 @@ RESPONSABILITES = {
     "Both people manager and individual contributor": "Manager",
     "People manager": "Manager",
 }
+ORDRE_RESPONSABILITES = ["Contributeur", "Contributeur senior", "Manager"]
 
 TAILLES = {
     "Less than 20 employees": "Moins de 100",
@@ -50,3 +53,9 @@ def ajouter_groupes(df: pd.DataFrame) -> pd.DataFrame:
         d["OrgSize"].map(TAILLES), categories=ORDRE_TAILLES, ordered=True
     )
     return d
+
+
+def groupes_sous_seuil(df: pd.DataFrame, colonne: str) -> pd.Series:
+    """Effectif des groupes présents mais sous SEUIL_N, dont la médiane est masquée."""
+    effectifs = df[colonne].value_counts()
+    return effectifs[(effectifs > 0) & (effectifs < SEUIL_N)]

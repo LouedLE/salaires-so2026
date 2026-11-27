@@ -1,6 +1,10 @@
 import pandas as pd
 
-from salaires.axes.axe2_metier_entreprise import AUTRES_PROFILS, ajouter_groupes
+from salaires.axes.axe2_metier_entreprise import (
+    AUTRES_PROFILS,
+    ajouter_groupes,
+    groupes_sous_seuil,
+)
 
 
 def test_famille_de_role():
@@ -52,3 +56,14 @@ def test_ne_modifie_pas_le_tableau_d_origine():
     df = pd.DataFrame({"Role": ["Developer, back-end"], "ICorPM": [None], "OrgSize": [None]})
     ajouter_groupes(df)
     assert "Famille" not in df.columns
+
+
+def test_groupes_sous_seuil():
+    tailles = pd.Categorical(
+        ["Moins de 100"] * 30 + ["100 à 999"] * 29,
+        categories=["Moins de 100", "100 à 999", "10 000 et plus"],
+    )
+    df = pd.DataFrame({"TailleEntreprise": tailles})
+    masques = groupes_sous_seuil(df, "TailleEntreprise")
+    # 30 atteint le seuil, 29 non ; la classe à 0 répondant n'est pas signalée.
+    assert masques.to_dict() == {"100 à 999": 29}
