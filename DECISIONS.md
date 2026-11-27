@@ -99,3 +99,59 @@ comptés sur `survey_results_public.csv` 2026.
   - Éditeurs de logiciels = Software development (65)
   - Autres secteurs = le reste (237). Les 3 répondants sans secteur renseigné sont exclus.
 - Figure centrale : ESN 44 500 € (n = 66), éditeurs 53 000 € (n = 65). Chiffres recalculés à partir du fichier, pas repris de la restitution officielle.
+## Axe 2 : métier et entreprise (27/11/2026)
+
+Code : `ajouter_groupes` dans `src/salaires/axes/axe2_metier_entreprise.py`.
+Effectifs et médianes sur la population de 371 répondants.
+
+### Familles de métier (`Role` → `Famille`)
+
+Seuls trois métiers dépassent 30 répondants. Les autres sont réunis pour ne pas perdre 134 personnes.
+
+| `Role` | Famille | n | Médiane |
+|--------|---------|--:|--------:|
+| Developer, full-stack | Développeur full-stack | 149 | 49 000 € |
+| Developer, back-end | Développeur back-end | 57 | 58 000 € |
+| Architect, software or solutions | Architecte | 31 | 72 000 € |
+| Toutes les autres valeurs (26 métiers) | Autres profils de développement | 134 | 53 250 € |
+
+- Les effectifs 153 / 60 / 31 cités plus haut sont comptés avant les bornes de salaire (382 répondants).
+- La famille « Autres » est hétérogène (bureau, embarqué, DevOps, IA, mais aussi 6 engineering managers
+  et 8 chercheurs) : sa médiane ne décrit pas un métier.
+
+### Responsabilité (`ICorPM` → `Responsabilite`)
+
+| `ICorPM` | Groupe | n | Médiane |
+|----------|--------|--:|--------:|
+| Individual contributor | Contributeur | 209 | 48 000 € |
+| Individual contributor in a senior or staff-level role | Contributeur senior | 111 | 64 000 € |
+| Both people manager and individual contributor + People manager | Manager | 49 (46 + 3) | 60 000 € |
+
+- « People manager » seul ne compte que 3 répondants : regroupé avec les managers qui codent encore.
+- 2 répondants sans réponse : hors groupes.
+
+### Taille d'entreprise (`OrgSize` → `TailleEntreprise`)
+
+| `OrgSize` | Classe | n | Médiane |
+|-----------|--------|--:|--------:|
+| Less than 20 + 20 to 99 employees | Moins de 100 | 151 (60 + 91) | 52 000 € |
+| 100 to 499 + 500 to 999 employees | 100 à 999 | 104 (70 + 34) | 55 000 € |
+| 1,000 to 4,999 + 5,000 to 9,999 employees | 1 000 à 9 999 | 62 (50 + 12) | 52 890 € |
+| 10,000 or more employees | 10 000 et plus | 52 | 55 000 € |
+
+- Exclus : « I don't know » (1) et « Just me - I am a freelancer » (1, incohérent avec un salarié).
+  Les lignes restent dans la population avec une classe vide.
+- 4 classes plutôt que 7 : « 5 000 à 9 999 » seule n'a que 12 répondants.
+- Classes ordonnées (catégorie pandas) pour garder l'ordre des tailles sur les graphiques.
+
+### Présentation sur la page (validé par le chef de projet, 27/11/2026)
+
+- « Autres profils de développement » reste sur le graphique des métiers, en gris, avec la mention
+  « groupe hétérogène (desktop, DevOps, embarqué, IA, recherche...), médiane non interprétable comme un métier ».
+  Il n'est jamais cité dans le message. Le retirer ferait disparaître 134 répondants sur 371 sans le dire.
+- Le message de la page porte sur la responsabilité : 48 000 € pour un contributeur, 64 000 € pour un contributeur senior.
+- À expérience égale, l'écart se réduit sans disparaître : chez les seniors (10 ans et plus), 67 750 € pour un
+  contributeur senior (n = 86) contre 58 000 € pour un contributeur (n = 81), soit 9 750 € au lieu de 16 000 €.
+  Une partie de l'écart global vient donc de l'expérience.
+- La figure sur la taille d'entreprise est gardée et présentée comme un constat : la taille de l'entreprise
+  ne change presque pas le salaire (52 000 à 55 000 €). Un résultat nul reste une information utile pour l'ESN.

@@ -29,8 +29,9 @@ app/pages/N_*.py                une page par axe, filtres et vues
 | Chargement | src/salaires/chargement.py | charger_brut |
 | Population | src/salaires/population.py | definir_population |
 | Logique partagée | src/salaires/logique.py | mediane_par_groupe, legende_population |
-| Tableau de bord | app/Accueil.py | à compléter |
+| Tableau de bord | app/Accueil.py, app/filtres.py | filtre_niveau |
 | Axes 1 à 5 | src/salaires/axes/, app/pages/ | à compléter |
+| Axe 2 : Métier et entreprise | src/salaires/axes/axe2_metier_entreprise.py, app/pages/2_metier_entreprise.py | ajouter_groupes, groupes_sous_seuil |
 | Axe 5 : France face à l'Europe | src/salaires/axes/axe5_france_europe.py, app/pages/5_france_europe.py | definir_population_europe, mediane_par_pays, mediane_par_niveau, ecart_avec_france |
 
 ## Cache
@@ -40,4 +41,9 @@ app/pages/N_*.py                une page par axe, filtres et vues
 
 ## Données de session (`st.session_state`)
 
-- Filtres partagés entre les pages : à compléter.
+- `niveau` : niveau d'expérience choisi (Tous, Junior, Confirmé, Senior), géré par `app/filtres.py`.
+  Le widget utilise la clé `_choix_niveau`, recopiée dans `niveau` à chaque changement :
+  Streamlit efface les clés de widget au changement de page, pas les autres.
+- Toutes les pages d'axe lisent `st.session_state.get("niveau", "Tous")`, sauf l'axe 1 (l'expérience y est la variable étudiée).
+- Axe 2 : appelle `filtre_niveau` (app/filtres.py), qui affiche le sélecteur de niveau et filtre la population.
+  Le filtre propre à l'axe (taille d'entreprise) reste dans `st.sidebar`, hors session.
