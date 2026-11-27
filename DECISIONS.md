@@ -87,6 +87,18 @@ comptés sur `survey_results_public.csv` 2026.
 - Le répondant sans `WorkExp` reste dans la population avec un `Niveau` vide :
   il compte dans « Tous » mais dans aucun niveau.
 
+## Axe 4 : conditions de travail et secteur
+
+- `WorkSetting` en 3 groupes, effectifs sur la population complète (371 répondants) :
+  - Télétravail complet = Remote (65)
+  - Hybride = Hybrid (some remote, leans heavy to in-person) 150 + Hybrid (some in-person, leans heavy to flexibility) 71 + Your choice 41, soit 262
+  - Sur site = In-person (44)
+  - Chaque groupe dépasse le seuil de 30.
+- `Industry` en 3 groupes :
+  - ESN et conseil = IT services, consulting, systems integration, or managed services (66)
+  - Éditeurs de logiciels = Software development (65)
+  - Autres secteurs = le reste (237). Les 3 répondants sans secteur renseigné sont exclus.
+- Figure centrale : ESN 44 500 € (n = 66), éditeurs 53 000 € (n = 65). Chiffres recalculés à partir du fichier, pas repris de la restitution officielle.
 ## Axe 2 : métier et entreprise (27/11/2026)
 
 Code : `ajouter_groupes` dans `src/salaires/axes/axe2_metier_entreprise.py`.
