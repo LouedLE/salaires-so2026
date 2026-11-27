@@ -37,6 +37,21 @@ entre 15 000 et 200 000 €, soit 371 répondants. Salaire médian 53 000 €,
 - Comparaison européenne (salaire renseigné) : Allemagne 1 343, Royaume-Uni 918,
   Pays-Bas 377, Espagne 357.
 
+## Axe 3 : technologies (27/11/2026)
+
+- Population de l'axe : les répondants de la population principale qui indiquent leurs langages
+  (`LanguagesHaveWorkedWith` renseigné), soit 248 sur 371. Le chiffre de 257 correspond aux répondants
+  avant les bornes de salaire (382) : les 9 salaires hors de 15 000 à 200 000 € sont exclus comme partout ailleurs.
+- `eclater_choix_multiples` sur `LanguagesHaveWorkedWith` : une ligne par langage coché, 1 504 lignes, 47 langages.
+  Un répondant coche 6 langages en médiane, il compte donc dans plusieurs groupes : les n des barres
+  ne s'additionnent pas, la légende de la figure donne le nombre de répondants (248).
+- 14 langages atteignent le seuil de 30 répondants, les 33 autres sont masqués.
+- Constat : Go est le mieux payé, 65 000 € (n = 42, +22 % par rapport à la médiane de l'axe, 53 250 €),
+  puis Rust, 62 000 € (n = 57, +16 %). En bas, C#, PHP et Java à 45 000 € (n = 53, 62, 73, -16 %).
+  L'expérience médiane va de 9,5 à 11 ans selon le langage et la part de seniors de 50 à 61 % :
+  l'écart ne s'explique pas par l'expérience.
+- Filtre de niveau partagé : aucun langage n'atteint 30 juniors, 6 langages chez les confirmés, 10 chez les seniors.
+
 ## Axe 5 : France face à l'Europe (27/11/2026)
 
 - Population propre à l'axe, définie dans `src/salaires/axes/axe5_france_europe.py` (pas dans `population.py`) :
