@@ -1,12 +1,4 @@
-"""Chargement des données brutes de l'enquête. Aucun import Streamlit ici.
-
-Responsable : à attribuer (socle commun).
-
-À implémenter :
-- charger_brut(annee) : lit data/raw/<annee>/survey_results_public.csv
-  avec usecols=COLONNES_UTILES pour limiter la mémoire (le fichier fait ~120 Mo).
-- La mise en cache (@st.cache_data) se fait côté app/, pas ici.
-"""
+"""Chargement des données brutes de l'enquête. Aucun import Streamlit ici."""
 
 from pathlib import Path
 
@@ -38,4 +30,10 @@ COLONNES_UTILES = [
 
 
 def charger_brut(annee: int = 2026) -> pd.DataFrame:
-    raise NotImplementedError("Socle commun : chargement à écrire")
+    chemin = RACINE / "data" / "raw" / str(annee) / "survey_results_public.csv"
+    if not chemin.exists():
+        raise FileNotFoundError(
+            f"Fichier introuvable : {chemin}\n"
+            f"Télécharge-le avec : uv run python scripts/telecharger_donnees.py --annee {annee}"
+        )
+    return pd.read_csv(chemin, usecols=COLONNES_UTILES, low_memory=False)
