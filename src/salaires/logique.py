@@ -12,7 +12,7 @@ def mediane_par_groupe(
 ) -> pd.DataFrame:
     """Médiane et effectif par groupe, sans les groupes sous SEUIL_N."""
     stats = (
-        df.groupby(colonne)[valeur]
+        df.groupby(colonne, observed=True)[valeur]
         .agg(mediane="median", n="count")
         .reset_index()
     )
