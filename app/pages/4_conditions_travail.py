@@ -1,13 +1,19 @@
+"""Page 4 : conditions de travail et secteur. Auteur : Arthur Dousset."""
+
 import plotly.express as px
 import streamlit as st
 
 from composants import afficher_figure
 from donnees import charger_population
+from filtres import filtre_niveau
 from salaires.axes.axe4_conditions_travail import (
     EDITEURS,
     ESN,
+    SUR_SITE,
+    TELETRAVAIL,
     comparer_esn_editeurs,
     medianes_par_travail,
+    regrouper_travail,
 )
 
 
@@ -17,10 +23,7 @@ def euros(montant):
 
 st.title("Axe 4 : Conditions de travail et secteur")
 
-niveau = st.session_state.get("niveau", "Tous")
-pop = charger_population()
-if niveau != "Tous":
-    pop = pop[pop["Niveau"] == niveau]
+pop = filtre_niveau(charger_population())
 
 esn_editeurs = comparer_esn_editeurs(pop)
 travail = medianes_par_travail(pop)
@@ -43,6 +46,7 @@ else:
         text="mediane",
         labels={"SecteurGroupe": "Secteur", "mediane": "Salaire médian (€)"},
     )
+    fig.update_traces(texttemplate="%{y:,.0f} €")
     afficher_figure(fig, n=int(esn_editeurs["n"].sum()))
 
 st.markdown("### Salaire médian selon le mode de travail")
@@ -53,4 +57,20 @@ fig2 = px.bar(
     text="mediane",
     labels={"Travail": "Mode de travail", "mediane": "Salaire médian (€)"},
 )
+fig2.update_traces(texttemplate="%{y:,.0f} €")
 afficher_figure(fig2, n=int(travail["n"].sum()))
+
+# Part des juniors par mode de travail, calculée sur toute la population (pas le filtre).
+juniors = (
+    regrouper_travail(charger_population())
+    .dropna(subset=["Niveau"])
+    .assign(junior=lambda d: d["Niveau"] == "Junior")
+    .groupby("Travail", observed=True)["junior"]
+    .mean()
+)
+st.markdown(
+    f"Une partie de l'écart peut tenir à la composition des groupes : "
+    f"{juniors[SUR_SITE] * 100:.0f} % des répondants sur site sont juniors, "
+    f"contre {juniors[TELETRAVAIL] * 100:.0f} % en télétravail "
+    f"(effectifs faibles : à lire avec prudence)."
+)
