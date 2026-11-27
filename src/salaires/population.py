@@ -11,7 +11,7 @@ ConvertedCompYearly (en dollars, dépend du taux de change de l'année).
 
 import pandas as pd
 
-DESCRIPTION = "Développeurs professionnels salariés à temps plein en France"
+DESCRIPTION = "Développeurs professionnels salariés en France"
 
 PAYS = "France"
 CODE_PRINCIPAL = "I create code as a primary part of my job"
