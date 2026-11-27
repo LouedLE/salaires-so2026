@@ -1,6 +1,7 @@
 import pandas as pd
 
 from salaires import logique
+from salaires.population import DESCRIPTION
 
 
 def test_mediane_par_groupe_exclut_les_groupes_sous_le_seuil():
@@ -19,8 +20,7 @@ def test_mediane_par_groupe_exclut_les_groupes_sous_le_seuil():
 
 def test_legende_population_par_defaut():
     assert logique.legende_population(371) == (
-        "Développeurs professionnels salariés à temps plein en France, "
-        "enquête Stack Overflow 2026, n = 371 répondants"
+        f"{DESCRIPTION}, enquête Stack Overflow 2026, n = 371 répondants"
     )
 
 
