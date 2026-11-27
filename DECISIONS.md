@@ -5,7 +5,21 @@ Chaque choix est daté et justifié. Les chiffres viennent du fichier, pas de la
 ## Commanditaire et message
 
 - Commanditaire : la direction de la rémunération d'une ESN qui révise sa grille salariale.
-- Message du tableau de bord : à écrire après l'exploration.
+
+### Message
+
+Trois constats les plus nets de l'exploration (`notebooks/exploration_fayssal.ipynb`, 27/11/2026).
+Population : France, code comme activité principale, salarié, salaire déclaré en euros
+entre 15 000 et 200 000 €, soit 371 répondants. Salaire médian 53 000 €,
+1er quartile 42 000 €, 3e quartile 70 000 €.
+
+1. Le salaire suit l'expérience : médiane de 38 315 € pour les juniors (n = 56),
+   48 000 € pour les confirmés (n = 107) et 62 000 € pour les seniors (n = 207), soit +62 % entre junior et senior.
+2. Les ESN paient moins que les éditeurs de logiciels : 44 500 € (n = 66) contre 53 000 € (n = 65),
+   soit 16 % de moins. L'expérience médiane est comparable (10,5 ans contre 10), l'écart ne vient donc pas de là.
+   Ce sont les deux seuls secteurs au-dessus du seuil de 30 répondants.
+3. Le télétravail complet est le mieux payé : 65 000 € en télétravail (n = 65) contre 41 394 € en présentiel (n = 44).
+   Écart à nuancer : 45 % des répondants en présentiel sont juniors, contre 6 % en télétravail.
 
 ## Constats sur les données 2026
 
