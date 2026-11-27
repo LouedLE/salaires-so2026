@@ -31,10 +31,12 @@ app/pages/N_*.py                une page par axe, filtres et vues
 | Logique partagée | src/salaires/logique.py | mediane_par_groupe, legende_population |
 | Tableau de bord | app/Accueil.py | à compléter |
 | Axes 1 à 5 | src/salaires/axes/, app/pages/ | à compléter |
+| Axe 5 : France face à l'Europe | src/salaires/axes/axe5_france_europe.py, app/pages/5_france_europe.py | definir_population_europe, mediane_par_pays, mediane_par_niveau, ecart_avec_france |
 
 ## Cache
 
 - `@st.cache_data` sur le chargement et la population : à compléter.
+- Axe 5 : `charger_population_europe` (page 5) met en cache la population des cinq pays.
 
 ## Données de session (`st.session_state`)
 
