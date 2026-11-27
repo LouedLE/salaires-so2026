@@ -15,3 +15,20 @@ def test_mediane_par_groupe_exclut_les_groupes_sous_le_seuil():
     assert list(res["Groupe"]) == ["A"]
     assert res.loc[0, "n"] == seuil
     assert res.loc[0, "mediane"] == 15.5
+
+
+def test_legende_population_par_defaut():
+    assert logique.legende_population(371) == (
+        "Développeurs professionnels salariés à temps plein en France, "
+        "enquête Stack Overflow 2026, n = 371 répondants"
+    )
+
+
+def test_legende_population_description_personnalisee():
+    legende = logique.legende_population(
+        257, description="Répondants qui renseignent leurs langages"
+    )
+    assert legende == (
+        "Répondants qui renseignent leurs langages, "
+        "enquête Stack Overflow 2026, n = 257 répondants"
+    )
