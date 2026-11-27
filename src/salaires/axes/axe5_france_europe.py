@@ -40,3 +40,15 @@ def definir_population_europe(df: pd.DataFrame) -> pd.DataFrame:
     pop = df[garder].copy()
     pop["Pays"] = pop["Country"].map(PAYS)
     return ajouter_niveau(pop)
+
+
+def mediane_par_pays(pop: pd.DataFrame) -> pd.DataFrame:
+    """Salaire médian en dollars et effectif par pays, du plus bas au plus haut."""
+    tableau = (
+        pop.groupby("Pays")["ConvertedCompYearly"]
+        .agg(mediane="median", n="count")
+        .reset_index()
+        .sort_values("mediane")
+    )
+    tableau["fiable"] = tableau["n"] >= SEUIL_N
+    return tableau
