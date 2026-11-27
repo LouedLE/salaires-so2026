@@ -24,3 +24,12 @@ def legende_population(
 ) -> str:
     """Légende affichée sous chaque figure : qui, quelle enquête, combien."""
     return f"{description}, enquête Stack Overflow {annee}, n = {n} répondants"
+
+
+def eclater_choix_multiples(df: pd.DataFrame, colonne: str) -> pd.DataFrame:
+    """Une ligne par choix pour une colonne dont les valeurs sont séparées par ';'."""
+    eclate = df.dropna(subset=[colonne]).copy()
+    eclate[colonne] = eclate[colonne].str.split(";")
+    eclate = eclate.explode(colonne)
+    eclate[colonne] = eclate[colonne].str.strip()
+    return eclate.reset_index(drop=True)

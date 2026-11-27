@@ -32,3 +32,15 @@ def test_legende_population_description_personnalisee():
         "Répondants qui renseignent leurs langages, "
         "enquête Stack Overflow 2026, n = 257 répondants"
     )
+
+
+def test_eclater_choix_multiples_une_ligne_par_choix():
+    df = pd.DataFrame(
+        {
+            "Langages": ["Python;SQL", "Python", None],
+            "SalaireEUR": [50000, 40000, 30000],
+        }
+    )
+    res = logique.eclater_choix_multiples(df, "Langages")
+    assert list(res["Langages"]) == ["Python", "SQL", "Python"]
+    assert list(res["SalaireEUR"]) == [50000, 50000, 40000]
