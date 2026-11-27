@@ -34,7 +34,7 @@ app/pages/N_*.py                une page par axe, filtres et vues
 
 ## Cache
 
-- `@st.cache_data` sur le chargement et la population : à compléter.
+- `charger_population()` (app/donnees.py) est décorée par `@st.cache_data` : elle enchaîne `charger_brut`, `definir_population` puis `ajouter_niveau`. Le résultat est calculé une fois puis réutilisé par toutes les pages.
 
 ## Données de session (`st.session_state`)
 
