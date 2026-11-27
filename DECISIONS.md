@@ -114,3 +114,12 @@ Seuls trois métiers dépassent 30 répondants. Les autres sont réunis pour ne 
   Les lignes restent dans la population avec une classe vide.
 - 4 classes plutôt que 7 : « 5 000 à 9 999 » seule n'a que 12 répondants.
 - Classes ordonnées (catégorie pandas) pour garder l'ordre des tailles sur les graphiques.
+
+### Présentation sur la page (validé par le chef de projet, 27/11/2026)
+
+- « Autres profils de développement » reste sur le graphique des métiers, en gris, avec la mention
+  « groupe hétérogène (desktop, DevOps, embarqué, IA, recherche...), médiane non interprétable comme un métier ».
+  Il n'est jamais cité dans le message. Le retirer ferait disparaître 134 répondants sur 371 sans le dire.
+- Le message de la page porte sur la responsabilité : 48 000 € pour un contributeur, 64 000 € pour un contributeur senior.
+- La figure sur la taille d'entreprise est gardée et présentée comme un constat : la taille de l'entreprise
+  ne change presque pas le salaire (52 000 à 55 000 €). Un résultat nul reste une information utile pour l'ESN.
