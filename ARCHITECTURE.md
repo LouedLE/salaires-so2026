@@ -31,6 +31,7 @@ app/pages/N_*.py                une page par axe, filtres et vues
 | Logique partagée | src/salaires/logique.py | mediane_par_groupe, legende_population |
 | Tableau de bord | app/Accueil.py | à compléter |
 | Axes 1 à 5 | src/salaires/axes/, app/pages/ | à compléter |
+| Axe 2 : Métier et entreprise | src/salaires/axes/axe2_metier_entreprise.py, app/pages/2_metier_entreprise.py | ajouter_groupes, groupes_sous_seuil |
 | Axe 5 : France face à l'Europe | src/salaires/axes/axe5_france_europe.py, app/pages/5_france_europe.py | definir_population_europe, mediane_par_pays, mediane_par_niveau, ecart_avec_france |
 
 ## Cache
@@ -41,3 +42,5 @@ app/pages/N_*.py                une page par axe, filtres et vues
 ## Données de session (`st.session_state`)
 
 - Filtres partagés entre les pages : à compléter.
+- Axe 2 : lit `st.session_state.get("niveau", "Tous")` et filtre sur la colonne `Niveau` si la valeur
+  n'est pas « Tous ». Le filtre propre à l'axe (taille d'entreprise) reste dans `st.sidebar`, hors session.
