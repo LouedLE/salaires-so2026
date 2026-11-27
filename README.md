@@ -37,13 +37,25 @@ Les données ne sont pas versionnées. Elles sont téléchargées dans `data/raw
 
 ## Équipe et axes
 
+Chef de projet : Louis-Edouard.
+
 | Axe | Sujet | Responsable |
 |-----|-------|-------------|
-| 1 | Expérience | à compléter |
-| 2 | Métier et entreprise | à compléter |
-| 3 | Technologies | à compléter |
-| 4 | Conditions de travail | à compléter |
+| 1 | Expérience | Louis-Edouard |
+| 2 | Métier et entreprise | Pierre |
+| 3 | Technologies | Yann |
+| 4 | Conditions de travail et secteur | Arthur |
 | 5 | France face à l'Europe | Fayssal |
+
+Socle commun :
+
+| Brique | Fichiers | Responsable |
+|--------|----------|-------------|
+| Chargement et cache | src/salaires/chargement.py, app/donnees.py | Arthur |
+| Population | src/salaires/population.py (definir_population) | Pierre |
+| Niveaux d'expérience et exploration | src/salaires/population.py (ajouter_niveau), notebooks/exploration_fayssal.ipynb | Fayssal |
+| Logique partagée et légende des figures | src/salaires/logique.py, app/composants.py | Yann |
+| Tableau de bord et filtre partagé | app/Accueil.py, app/filtres.py | Louis-Edouard |
 
 ## Règles de travail
 
